@@ -9,10 +9,11 @@ pip install gtuworld
 ## Usage
 ```python
 import gtuworld
+branch = "BE" # BE or DI
 subject_codes = [3110002, 3110005] # Enter your subject_codes here
-gtuworld.download(subject_codes)
+gtuworld.download(branch, subject_codes)
 ```
-**Please note:** Only BE papers are available for this release.
+**Please note:** BE and DI papers are available in this release.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
