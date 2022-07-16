@@ -1,6 +1,11 @@
 import os, requests
 
-def download(subject_codes):
+def download(branch, subject_codes):
+    # invalid branch
+    if branch != "BE" and branch != "DI":
+        print("Invalid branch. Please choose BE/DI.")
+        return
+
     # create GTU folder
     dir = os.getcwd() + '/GTU'
     print(f"Creating GTU folder in {os.getcwd()}")
@@ -8,19 +13,19 @@ def download(subject_codes):
         os.mkdir(dir)
     except:
         pass
-
+    
     for subject_code in subject_codes:
         print(f"\n\nStarting fetching {subject_code} papers")
         # get all paper links
-        paper1 = f"https://www.gtu.ac.in/uploads/W2021/BE/{subject_code}.pdf"
-        paper2 = f"https://www.gtu.ac.in/uploads/W2020/BE/{subject_code}.pdf"
-        paper3 = f"https://www.gtu.ac.in/uploads/W2019/BE/{subject_code}.pdf"
-        paper4 = f"https://www.gtu.ac.in/uploads/W2018/BE/{subject_code}.pdf"
-        paper5 = f"https://www.gtu.ac.in/uploads/W2017/BE/{subject_code}.pdf"
-        paper6 = f"https://www.gtu.ac.in/uploads/S2021/BE/{subject_code}.pdf"
-        paper7 = f"https://www.gtu.ac.in/uploads/S2020/BE/{subject_code}.pdf"
-        paper8 = f"https://www.gtu.ac.in/uploads/S2019/BE/{subject_code}.pdf"
-        paper9 = f"https://www.gtu.ac.in/uploads/S2018/BE/{subject_code}.pdf"
+        paper1 = f"https://www.gtu.ac.in/uploads/W2021/{branch}/{subject_code}.pdf"
+        paper2 = f"https://www.gtu.ac.in/uploads/W2020/{branch}/{subject_code}.pdf"
+        paper3 = f"https://www.gtu.ac.in/uploads/W2019/{branch}/{subject_code}.pdf"
+        paper4 = f"https://www.gtu.ac.in/uploads/W2018/{branch}/{subject_code}.pdf"
+        paper5 = f"https://www.gtu.ac.in/uploads/W2017/{branch}/{subject_code}.pdf"
+        paper6 = f"https://www.gtu.ac.in/uploads/S2021/{branch}/{subject_code}.pdf"
+        paper7 = f"https://www.gtu.ac.in/uploads/S2020/{branch}/{subject_code}.pdf"
+        paper8 = f"https://www.gtu.ac.in/uploads/S2019/{branch}/{subject_code}.pdf"
+        paper9 = f"https://www.gtu.ac.in/uploads/S2018/{branch}/{subject_code}.pdf"
 
         r1 = requests.get(paper1)
         r2 = requests.get(paper2)
@@ -80,5 +85,5 @@ def download(subject_codes):
 
     # create txt file
     print("Please read instructions file in GTU folder :)")
-    f = open(f"{dir}/instructions.txt", 'w')
-    f.write(f"Welcome to GTU World!\n\nYou will find your {subject_codes} papers inside GTU directory.\nHope, you will found this module helpful.\n\nThanks & Regards,\nDhiraj Beri.")
+    with open(f"{dir}/instructions.txt", 'w') as f:
+        f.write(f"Welcome to GTU World!\n\nYou will find your {subject_codes} papers inside GTU directory.\nHope, you will found this module helpful.\n\nThanks & Regards,\nDhiraj Beri.")
